@@ -10,13 +10,22 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <engine name="cordova-android" version=">=10.0.0"/>
         <engine name="cordova-ios" version=">=5.0.0"/>
     </engines>
-
-    <platform name="ios">
-
-    </platform>
+           
+    <preference name="APP_HOST" default="/" />
+    <preference name="APP_SCHEME" default="/" />
+    <preference name="APP_PATHPATTERN" default="/" />
 
     <platform name="android">
-
+        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="$APP_SCHEME" />
+                <data android:host="$APP_HOST" />
+                <data android:pathPattern="$APP_PATHPATTERN" />
+            </intent-filter>
+        </config-file>
     </platform>
-
+        
 </plugin>
