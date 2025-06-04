@@ -27,5 +27,18 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             </intent-filter>
         </config-file>
     </platform>
-        
+           
+    <platform name="ios">
+        <config-file target="*-Debug.plist" parent="com.apple.developer.associated-domains">
+            <array>
+                <string>applinks:$APP_HOST</string>
+            </array>
+        </config-file>
+
+        <config-file target="*-Release.plist" parent="com.apple.developer.associated-domains">
+            <array>
+                <string>applinks:$APP_HOST</string>
+            </array>
+        </config-file>
+    </platform>
 </plugin>
