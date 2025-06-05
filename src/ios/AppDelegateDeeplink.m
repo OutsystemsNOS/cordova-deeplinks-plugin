@@ -28,3 +28,4 @@ static NSString *const PLUGIN_NAME = @"UniversalLinks";
 
     return handled;
 }
+@end
