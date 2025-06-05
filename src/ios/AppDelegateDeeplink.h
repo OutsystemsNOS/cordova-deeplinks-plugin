@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
 
-@interface AppDelegate (CULPlugin)
+@interface AppDelegate (Deeplink)
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler;
 
