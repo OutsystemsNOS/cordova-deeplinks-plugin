@@ -5,7 +5,10 @@ static NSString *const PLUGIN_NAME = @"UniversalLinks";
 
 @implementation AppDelegate (Deeplink)
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler {
+// Universal Link handler
+- (BOOL)application:(UIApplication *)application 
+continueUserActivity:(NSUserActivity *)userActivity 
+restorationHandler:(void (^)(NSArray *))restorationHandler {
 
     if (![userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb] || userActivity.webpageURL == nil) {
         NSLog(@"[UniversalLinks] invalid url");
@@ -18,14 +21,23 @@ static NSString *const PLUGIN_NAME = @"UniversalLinks";
         return NO;
     }
 
-    // Show deeplink
     NSLog(@"[UniversalLinks] URL: %@", userActivity.webpageURL.absoluteString);
     
     BOOL handled = [plugin handleUserActivity:userActivity];
 
-    // show if it is a valid universal link
     NSLog(@"[UniversalLinks] handleUserActivity result: %@", handled ? @"YES" : @"NO");
 
     return handled;
 }
+
+// Deep link (URL scheme) handler
+- (BOOL)application:(UIApplication *)app 
+            openURL:(NSURL *)url 
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+
+    NSLog(@"[DeepLink] App opened via URL scheme: %@", url.absoluteString);
+    
+    return YES;
+}
+
 @end
