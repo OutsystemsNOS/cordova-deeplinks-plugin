@@ -40,17 +40,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 <string>applinks:$APP_HOST</string>
             </array>
         </config-file>
-        <config-file parent="CFBundleURLTypes" target="*-Info.plist">
-           <array>
-            <dict>
-                <key>CFBundleURLSchemes</key>
-                <array>
-                    <string>pt.nos.osatmospheretest</string>
-                </array>
-                <key>CFBundleURLName</key>
-                <string>OSTESTAPP</string>
-            </dict>
-           </array>
-        </config-file>       
+     
     </platform>
 </plugin>
