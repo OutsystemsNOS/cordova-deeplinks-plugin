@@ -1,6 +1,6 @@
-window.nosLinks = {
+window.NOSLinksPlugin = {
     onDeepLink: function (url) {
-        const event = new CustomEvent("noslink", { detail: { url } });
+        const event = new CustomEvent("NOSLinksPlugin", { detail: { url } });
         window.dispatchEvent(event);
     }
 };
