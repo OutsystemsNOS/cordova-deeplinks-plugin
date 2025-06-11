@@ -14,6 +14,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <js-module src="www/NOSLinks.js" name="NOSLinks">
                <clobbers target="NOSLinks" />
     </js-module>
+    <asset src="www/NOSLinks.js" target="NOSLinks.js" />
            
     <preference name="APP_HOST" default="dlapp.nos.pt" />
     <preference name="APP_SCHEME" default="/" />
