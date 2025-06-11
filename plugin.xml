@@ -3,7 +3,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
            id="com.cordova.plugin.intentfilter"
       version="1.0">
 
-    <name>cordova plugin intentfilter</name>
+    <name>NOSLinksPlugin</name>
 
     <engines>
         <engine name="cordova" version=">=9.0.0"/>
