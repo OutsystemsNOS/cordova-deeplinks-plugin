@@ -1,7 +1,8 @@
-var exec = require('cordova/exec');
-
 module.exports = {
-    dummy: function () {
-        console.log('NOSLinks plugin dummy method');
+    onDeepLink: function (url) {
+        console.log("[NOSLinks] Received URL: ", url);
+        // Aqui podes dispatchar eventos, etc.
+        const event = new CustomEvent("noslink", { detail: { url } });
+        window.dispatchEvent(event);
     }
 };
