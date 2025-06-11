@@ -44,6 +44,10 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 <string>applinks:$APP_HOST</string>
             </array>
         </config-file>
+
+        <source-file src="src/ios/NOSLinksPlugin.h" />
+        <source-file src="src/ios/NOSLinksPlugin.m" />
+        <source-file src="src/ios/AppDelegate+NOSLinksPlugin.m" />
      
     </platform>
 </plugin>
