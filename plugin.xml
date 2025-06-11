@@ -11,7 +11,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <engine name="cordova-ios" version=">=5.0.0"/>
     </engines>
 
-    <js-module src="www/NOSLinksPlugin.js" name="NOSLinksPlugin">
+    <js-module src="www/NOSLinks.js" name="NOSLinks">
                <clobbers target="NOSLinksPlugin" />
     </js-module>
            
@@ -35,7 +35,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <platform name="ios">
 
         <config-file target="config.xml" parent="/*">
-            <feature name="NOSLinksPlugin">
+            <feature name="NOSLinks">
                    <param name="ios-package" value="NOSLinksPlugin" />
             </feature>
         </config-file>
