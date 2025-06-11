@@ -18,7 +18,6 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
     NOSLinksPlugin *plugin = [self.viewController getCommandInstance:PLUGIN_NAME];
     if (plugin == nil) {
         NSLog(@"[NOSLinks] Plugin not found");
-        return NO;
     }
 
     NSLog(@"[NOSLinks] URL: %@", userActivity.webpageURL.absoluteString);
