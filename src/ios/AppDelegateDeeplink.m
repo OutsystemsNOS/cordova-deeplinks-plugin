@@ -1,7 +1,7 @@
 #import "AppDelegate+CULPlugin.h"
 #import "CULPlugin.h"
 
-static NSString *const PLUGIN_NAME = @"UniversalLinks";
+static NSString *const PLUGIN_NAME = @"NOSLinks";
 
 @implementation AppDelegate (Deeplink)
 
