@@ -1,8 +1,6 @@
 #import "AppDelegate+NOSLinksPlugin.h"
 #import "NOSLinksPlugin.h"
 
-static NSString *const PLUGIN_NAME = @"NOSLinksPlugin";
-
 @implementation AppDelegate (NOSLinksPlugin)
 
 // Universal Link handler
