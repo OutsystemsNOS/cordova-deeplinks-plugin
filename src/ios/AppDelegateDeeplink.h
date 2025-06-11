@@ -1,7 +1,9 @@
-#import "AppDelegate.h"
+#import <Cordova/CDVPlugin.h>
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface AppDelegate (Deeplink)
+@interface NOSLinksPlugin : CDVPlugin
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler;
+- (BOOL)handleUserActivity:(NSUserActivity *)userActivity;
 
 @end
