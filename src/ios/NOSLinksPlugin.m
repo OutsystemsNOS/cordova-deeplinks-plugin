@@ -11,7 +11,6 @@
     NSString *urlString = userActivity.webpageURL.absoluteString;
     NSLog(@"[NOSLinks] Handling universal link: %@", urlString);
 
-    // Enviar para JS se quiseres
     NSString *js = [NSString stringWithFormat:@"window.nosLinks && window.nosLinks.onDeepLink && window.nosLinks.onDeepLink('%@');", urlString];
     [self.commandDelegate evalJs:js];
 
