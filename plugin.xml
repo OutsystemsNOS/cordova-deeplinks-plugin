@@ -58,5 +58,5 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <source-file src="src/ios/AppDelegate+NOSLinksPlugin.m" />
      
     </platform>
-    <asset src="www/NOSLinksPlugin.js" target="NOSLinksPlugin.js" />
+    <asset src="www/NOSLinks.js" target="NOSLinks.js" />
 </plugin>
