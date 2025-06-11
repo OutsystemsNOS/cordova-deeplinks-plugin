@@ -1,7 +1,7 @@
 #import "AppDelegate+NOSLinksPlugin.h"
 #import "NOSLinksPlugin.h"
 
-static NSString *const PLUGIN_NAME = @"NOSLinks";
+static NSString *const PLUGIN_NAME = @"NOSLinksPlugin";
 
 @implementation AppDelegate (NOSLinksPlugin)
 
