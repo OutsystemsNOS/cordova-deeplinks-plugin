@@ -11,8 +11,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <engine name="cordova-ios" version=">=5.0.0"/>
     </engines>
 
-    <js-module src="www/NOSLinks.js" name="NOSLinks">
-               <clobbers target="NOSLinks" />
+    <js-module src="www/NOSLinksPlugin.js" name="NOSLinksPlugin">
+               <clobbers target="NOSLinksPlugin" />
     </js-module>
            
     <preference name="APP_HOST" default="dlapp.nos.pt" />
@@ -51,5 +51,5 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <source-file src="src/ios/AppDelegate+NOSLinksPlugin.m" />
      
     </platform>
-    <asset src="www/NOSLinks.js" target="NOSLinks.js" />
+    <asset src="www/NOSLinksPlugin.js" target="NOSLinksPlugin.js" />
 </plugin>
