@@ -33,6 +33,13 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     </platform>
            
     <platform name="ios">
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="NOSLinksPlugin">
+                   <param name="ios-package" value="NOSLinksPlugin" />
+            </feature>
+        </config-file>
+               
         <config-file target="*-Debug.plist" parent="com.apple.developer.associated-domains">
             <array>
                 <string>applinks:$APP_HOST</string>
