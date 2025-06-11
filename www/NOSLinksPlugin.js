@@ -1,4 +1,4 @@
-var PLUGIN_NAME = @"NOSLinksPlugin";
+var PLUGIN_NAME = "NOSLinksPlugin";
 
 window.NOSLinksPlugin = {
     onDeepLink: function (url) {
