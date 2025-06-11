@@ -13,7 +13,7 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
         return NO;
     }
 
-    NOSLinksPlugin *plugin = [self.viewController getCommandInstance:@"NOSLinksPlugin"];
+    NOSLinksPlugin *plugin = [self.viewController getCommandInstance:@"NOSLinks"];
     if (plugin == nil) {
         NSLog(@"[NOSLinks] Plugin not found");
     }
