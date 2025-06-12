@@ -1,15 +1,15 @@
-#import "DeeplinksPlugin.h"
+#import "CustomDeeplinksPlugin.h"
 
-@implementation DeeplinksPlugin
+@implementation CustomDeeplinksPlugin
 
 static NSString *pendingURL = nil;
 
 - (void)pluginInitialize {
     if (pendingURL != nil) {
         NSString *escapedURL = [pendingURL stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
-        NSString *js = [NSString stringWithFormat:@"window.Deeplinks && window.Deeplinks.onDeepLink && window.Deeplinks.onDeepLink('%@');", escapedURL];
+        NSString *js = [NSString stringWithFormat:@"window.CustomDeeplinks && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('%@');", escapedURL];
         [self.commandDelegate evalJs:js];
-        NSLog(@"[Deeplinks] Fire pending universal link: %@", pendingURL);
+        NSLog(@"[CustomDeeplinks] Fire pending universal link: %@", pendingURL);
         pendingURL = nil;
     }
 }
@@ -18,15 +18,15 @@ static NSString *pendingURL = nil;
     if (userActivity.webpageURL == nil) return NO;
 
     NSString *urlString = userActivity.webpageURL.absoluteString;
-    NSLog(@"[Deeplinks] Handling universal link: %@", urlString);
+    NSLog(@"[CustomDeeplinks] Handling universal link: %@", urlString);
 
     pendingURL = urlString;
 
     if (self.webViewEngine && self.webViewEngine.engineWebView) {
         NSString *escapedURL = [urlString stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
-        NSString *js = [NSString stringWithFormat:@"window.Deeplinks && window.Deeplinks.onDeepLink && window.Deeplinks.onDeepLink('%@');", escapedURL];
+        NSString *js = [NSString stringWithFormat:@"window.CustomDeeplinks && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('%@');", escapedURL];
         [self.commandDelegate evalJs:js];
-        NSLog(@"[Deeplinks] Fire universal link immediately: %@", urlString);
+        NSLog(@"[CustomDeeplinks] Fire universal link immediately: %@", urlString);
     }
 
     return YES;
