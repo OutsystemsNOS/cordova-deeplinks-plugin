@@ -6,7 +6,8 @@ static NSString *pendingURL = nil;
 
 - (void)pluginInitialize {
     if (pendingURL != nil) {
-        NSString *js = [NSString stringWithFormat:@"window.NOSLinks && window.NOSLinks.onDeepLink && window.NOSLinks.onDeepLink('%@');", pendingURL];
+        NSString *escapedURL = [pendingURL stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
+        NSString *js = [NSString stringWithFormat:@"window.NOSLinks && window.NOSLinks.onDeepLink && window.NOSLinks.onDeepLink('%@');", escapedURL];
         [self.commandDelegate evalJs:js];
         NSLog(@"[NOSLinks] Fire pending universal link: %@", pendingURL);
         pendingURL = nil;
@@ -21,9 +22,11 @@ static NSString *pendingURL = nil;
 
     pendingURL = urlString;
 
-    if (self.webViewEngine && self.webViewEngine.engineWebView) {NSString *js = [NSString stringWithFormat:@"window.NOSLinks && window.NOSLinks.onDeepLink && window.NOSLinks.onDeepLink('%@');", urlString];
+    if (self.webViewEngine && self.webViewEngine.engineWebView) {
+        NSString *escapedURL = [urlString stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
+        NSString *js = [NSString stringWithFormat:@"window.NOSLinks && window.NOSLinks.onDeepLink && window.NOSLinks.onDeepLink('%@');", escapedURL];
         [self.commandDelegate evalJs:js];
-        NSLog(@"[NOSLinks] Fire universal link: %@", urlString);
+        NSLog(@"[NOSLinks] Fire universal link immediately: %@", urlString);
     }
 
     return YES;
