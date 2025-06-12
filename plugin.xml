@@ -3,7 +3,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
            id="com.cordova.deeplinks.plugin"
       version="1.0">
 
-    <name>DeeplinksPlugin</name>
+    <name>CustomDeeplinksPlugin</name>
 
     <engines>
         <engine name="cordova" version=">=9.0.0"/>
@@ -11,8 +11,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <engine name="cordova-ios" version=">=5.0.0"/>
     </engines>
 
-    <js-module src="www/Deeplinks.js" name="Deeplinks">
-               <clobbers target="DeeplinksPlugin" />
+    <js-module src="www/CustomDeeplinks.js" name="CustomDeeplinks">
+               <clobbers target="CustomDeeplinksPlugin" />
     </js-module>
            
     <preference name="APP_HOST" default="dlapp.nos.pt" />
@@ -35,8 +35,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <platform name="ios">
 
         <config-file target="config.xml" parent="/*">
-            <feature name="Deeplinks">
-                   <param name="ios-package" value="DeeplinksPlugin" />
+            <feature name="CustomDeeplinks">
+                   <param name="ios-package" value="CustomDeeplinksPlugin" />
             </feature>
         </config-file>
                
@@ -52,11 +52,11 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             </array>
         </config-file>
 
-        <source-file src="src/ios/DeeplinksPlugin.h" />
-        <source-file src="src/ios/DeeplinksPlugin.m" />
-        <source-file src="src/ios/AppDelegate+DeeplinksPlugin.h" />
-        <source-file src="src/ios/AppDelegate+DeeplinksPlugin.m" />
+        <source-file src="src/ios/CustomDeeplinksPlugin.h" />
+        <source-file src="src/ios/CustomDeeplinksPlugin.m" />
+        <source-file src="src/ios/AppDelegate+CustomDeeplinksPlugin.h" />
+        <source-file src="src/ios/AppDelegate+CustomDeeplinksPlugin.m" />
      
     </platform>
-    <asset src="www/Deeplinks.js" target="Deeplinks.js" />
+    <asset src="www/CustomDeeplinks.js" target="CustomDeeplinks.js" />
 </plugin>
