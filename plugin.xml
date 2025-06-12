@@ -12,7 +12,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     </engines>
 
     <js-module src="www/CustomDeeplinks.js" name="CustomDeeplinks">
-               <clobbers target="CustomDeeplinks" />
+               <clobbers target="CustomDeeplinksPlugin" />
     </js-module>
            
     <preference name="APP_HOST" default="dlapp.nos.pt" />
