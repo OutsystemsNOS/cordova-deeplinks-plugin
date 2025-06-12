@@ -1,9 +1,9 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 xmlns:android="http://schemas.android.com/apk/res/android"
-           id="com.cordova.plugin.intentfilter"
+           id="com.cordova.deeplinks.plugin"
       version="1.0">
 
-    <name>NOSLinksPlugin</name>
+    <name>DeeplinksPlugin</name>
 
     <engines>
         <engine name="cordova" version=">=9.0.0"/>
@@ -11,8 +11,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <engine name="cordova-ios" version=">=5.0.0"/>
     </engines>
 
-    <js-module src="www/NOSLinks.js" name="NOSLinks">
-               <clobbers target="NOSLinksPlugin" />
+    <js-module src="www/Deeplinks.js" name="Deeplinks">
+               <clobbers target="DeeplinksPlugin" />
     </js-module>
            
     <preference name="APP_HOST" default="dlapp.nos.pt" />
@@ -35,8 +35,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <platform name="ios">
 
         <config-file target="config.xml" parent="/*">
-            <feature name="NOSLinks">
-                   <param name="ios-package" value="NOSLinksPlugin" />
+            <feature name="Deeplinks">
+                   <param name="ios-package" value="DeeplinksPlugin" />
             </feature>
         </config-file>
                
@@ -52,11 +52,11 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             </array>
         </config-file>
 
-        <source-file src="src/ios/NOSLinksPlugin.h" />
-        <source-file src="src/ios/NOSLinksPlugin.m" />
-        <source-file src="src/ios/AppDelegate+NOSLinksPlugin.h" />
-        <source-file src="src/ios/AppDelegate+NOSLinksPlugin.m" />
+        <source-file src="src/ios/DeeplinksPlugin.h" />
+        <source-file src="src/ios/DeeplinksPlugin.m" />
+        <source-file src="src/ios/AppDelegate+DeeplinksPlugin.h" />
+        <source-file src="src/ios/AppDelegate+DeeplinksPlugin.m" />
      
     </platform>
-    <asset src="www/NOSLinks.js" target="NOSLinks.js" />
+    <asset src="www/Deeplinks.js" target="Deeplinks.js" />
 </plugin>
