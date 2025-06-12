@@ -7,7 +7,7 @@ window.CustomDeeplinksPlugin = {
     }
 };
 
-CustomDeeplinks.getPendingDeeplink = function (callback) {
+window.CustomDeeplinksPlugin.getPendingDeeplink = function (callback) {
     if (!window.cordova || !cordova.exec) {
         console.warn("Cordova not ready");
         callback(null);
