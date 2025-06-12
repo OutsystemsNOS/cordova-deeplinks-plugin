@@ -1,7 +1,7 @@
-#import "AppDelegate+DeeplinksPlugin.h"
-#import "DeeplinksPlugin.h"
+#import "AppDelegate+CustomDeeplinksPlugin.h"
+#import "CustomDeeplinksPlugin.h"
 
-@implementation AppDelegate (DeeplinksPlugin)
+@implementation AppDelegate (CustomDeeplinksPlugin)
 
 // Universal Link handler
 - (BOOL)application:(UIApplication *)application 
@@ -9,22 +9,22 @@ continueUserActivity:(NSUserActivity *)userActivity
 restorationHandler:(void (^)(NSArray *))restorationHandler {
 
     if (![userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb] || userActivity.webpageURL == nil) {
-        NSLog(@"[Deeplinks] Invalid URL");
+        NSLog(@"[CustomDeeplinks] Invalid URL");
         return NO;
     }
 
-    [self.viewController getCommandInstance:@"Deeplinks"];
+    [self.viewController getCommandInstance:@"CustomDeeplinks"];
 
-    DeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"Deeplinks"];
+    CustomDeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"CustomDeeplinks"];
     if (plugin == nil) {
         NSLog(@"[Deeplinks] Plugin not found");
     }
 
-    NSLog(@"[Deeplinks] URL: %@", userActivity.webpageURL.absoluteString);
+    NSLog(@"[CustomDeeplinks] URL: %@", userActivity.webpageURL.absoluteString);
 
     BOOL handled = [plugin handleUserActivity:userActivity];
 
-    NSLog(@"[Deeplinks] handleUserActivity result: %@", handled ? @"YES" : @"NO");
+    NSLog(@"[CustomDeeplinks] handleUserActivity result: %@", handled ? @"YES" : @"NO");
 
     return handled;
 }
@@ -34,7 +34,7 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
             openURL:(NSURL *)url 
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
 
-    NSLog(@"[Deeplinks] App opened via URL scheme: %@", url.absoluteString);
+    NSLog(@"[CustomDeeplinks] App opened via URL scheme: %@", url.absoluteString);
 
     return YES;
 }
