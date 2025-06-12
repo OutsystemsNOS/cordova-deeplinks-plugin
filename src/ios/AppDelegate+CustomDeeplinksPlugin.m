@@ -15,8 +15,6 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
         return NO;
     }
 
-    [self.viewController getCommandInstance:@"CustomDeeplinks"];
-
     CustomDeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"CustomDeeplinks"];
     if (plugin == nil) {
         NSLog(@"[Deeplinks] Plugin not found");
