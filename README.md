@@ -8,9 +8,9 @@ Cordova plugin to handle **universal links** and **deep links** on Android and i
 Install the plugin via the Cordova CLI:
 
 ```bash
-cordova plugin add https://github.com/SEU_USUARIO/cordova-custom-deeplinks-plugin.git \
+cordova plugin add https://github.com/MiguelRosaDev/cordova-custom-deeplinks-plugin.git \
   --variable APP_SCHEME=https \
-  --variable APP_HOST=dlapp.nos.pt \
+  --variable APP_HOST=your domain \
   --variable APP_PATHPATTERN=".*"
 ```
 
@@ -26,7 +26,7 @@ cordova plugin add https://github.com/SEU_USUARIO/cordova-custom-deeplinks-plugi
 These are the configurable plugin variables:
 
 - `APP_SCHEME`: the URI scheme (e.g. `https`)
-- `APP_HOST`: the host/domain (e.g. `dlapp.nos.pt`)
+- `APP_HOST`: the host/domain (e.g. `your app host`)
 - `APP_PATHPATTERN`: path pattern (e.g. `.*` for all paths)
 
 ## 🚀 Usage
@@ -68,7 +68,7 @@ The plugin injects an `<intent-filter>` into `AndroidManifest.xml`:
   <category android:name="android.intent.category.DEFAULT"/>
   <category android:name="android.intent.category.BROWSABLE"/>
   <data android:scheme="https" />
-  <data android:host="dlapp.nos.pt" />
+  <data android:host="app host" />
   <data android:pathPattern=".*" />
 </intent-filter>
 ```
@@ -82,7 +82,7 @@ The plugin sets up Universal Links by modifying the entitlements:
 ```xml
 <key>com.apple.developer.associated-domains</key>
 <array>
-  <string>applinks:dlapp.nos.pt</string>
+  <string>applinks:your app host</string>
 </array>
 ```
 
