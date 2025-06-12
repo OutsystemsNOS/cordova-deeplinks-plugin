@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
-import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 
 public class CustomDeeplinksPlugin extends CordovaPlugin {
@@ -16,11 +15,13 @@ public class CustomDeeplinksPlugin extends CordovaPlugin {
     protected void pluginInitialize() {
         Log.d(TAG, "Plugin initialized");
 
-        if (pendingURL != null) {
-            String escaped = pendingURL.replace("'", "\\'");
-            String js = "window.CustomDeeplinks && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('" + escaped + "');";
-            webView.getEngine().evaluateJavascript(js, null);
-            Log.d(TAG, "Fired pending URL: " + pendingURL);
+        Intent intent = cordova.getActivity().getIntent();
+        if (intent != null && intent.getData() != null) {
+            Uri data = intent.getData();
+            pendingURL = data.toString();
+            Log.d(TAG, "Detected cold start with URL: " + pendingURL);
+
+            fireDeepLinkToJS(pendingURL);
             pendingURL = null;
         }
     }
@@ -28,22 +29,21 @@ public class CustomDeeplinksPlugin extends CordovaPlugin {
     @Override
     public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        handleIntent(intent);
+        if (intent != null && intent.getData() != null) {
+            String url = intent.getData().toString();
+            Log.d(TAG, "Received deep link (warm): " + url);
+            fireDeepLinkToJS(url);
+        }
     }
 
-    private void handleIntent(Intent intent) {
-        Uri data = intent.getData();
-        if (data != null) {
-            String url = data.toString();
-            Log.d(TAG, "Received deep link: " + url);
-            pendingURL = url;
-
-            if (webView != null) {
-                String escaped = url.replace("'", "\\'");
-                String js = "window.CustomDeeplinks && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('" + escaped + "');";
-                webView.getEngine().evaluateJavascript(js, null);
-                Log.d(TAG, "Fired deep link immediately: " + url);
-            }
+    private void fireDeepLinkToJS(String url) {
+        if (webView != null) {
+            String escaped = url.replace("'", "\\'");
+            String js = "window.CustomDeeplinks && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('" + escaped + "');";
+            webView.getEngine().evaluateJavascript(js, null);
+            Log.d(TAG, "Dispatched JS event with URL: " + url);
+        } else {
+            Log.w(TAG, "WebView is null, cannot dispatch deep link");
         }
     }
 }
