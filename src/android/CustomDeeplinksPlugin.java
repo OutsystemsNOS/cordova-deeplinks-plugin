@@ -39,7 +39,7 @@ public class CustomDeeplinksPlugin extends CordovaPlugin {
     private void fireDeepLinkToJS(String url) {
         if (webView != null) {
             String escaped = url.replace("'", "\\'");
-            String js = "window.CustomDeeplinksPlugin && window.CustomDeeplinksPlugin.onDeepLink && window.CustomDeeplinksPlugin.onDeepLink('" + escaped + "');";
+            String js = "window.CustomDeeplinksPlugin && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('" + escaped + "');";
             webView.getEngine().evaluateJavascript(js, null);
             Log.d(TAG, "Dispatched JS event with URL: " + url);
         } else {
