@@ -7,7 +7,7 @@ static NSString *pendingURL = nil;
 - (void)pluginInitialize {
     if (pendingURL != nil) {
         NSString *escapedURL = [pendingURL stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
-        NSString *js = [NSString stringWithFormat:@"window.CustomDeeplinks && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('%@');", escapedURL];
+        NSString *js = [NSString stringWithFormat:@"window.CustomDeeplinksPlugin && window.CustomDeeplinksPlugin.onDeepLink && window.CustomDeeplinksPlugin.onDeepLink('%@');", escapedURL];
         [self.commandDelegate evalJs:js];
         NSLog(@"[CustomDeeplinks] Fire pending universal link: %@", pendingURL);
         pendingURL = nil;
@@ -24,7 +24,7 @@ static NSString *pendingURL = nil;
 
     if (self.webViewEngine && self.webViewEngine.engineWebView) {
         NSString *escapedURL = [urlString stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
-        NSString *js = [NSString stringWithFormat:@"window.CustomDeeplinks && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('%@');", escapedURL];
+        NSString *js = [NSString stringWithFormat:@"window.CustomDeeplinksPlugin && window.CustomDeeplinksPlugin.onDeepLink && window.CustomDeeplinksPlugin.onDeepLink('%@');", escapedURL];
         [self.commandDelegate evalJs:js];
         NSLog(@"[CustomDeeplinks] Fire universal link immediately: %@", urlString);
     }
