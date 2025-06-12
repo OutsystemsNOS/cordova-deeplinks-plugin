@@ -8,6 +8,8 @@
 continueUserActivity:(NSUserActivity *)userActivity 
 restorationHandler:(void (^)(NSArray *))restorationHandler {
 
+    NSLog(@"[CustomDeeplinks] First click");
+    
     if (![userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb] || userActivity.webpageURL == nil) {
         NSLog(@"[CustomDeeplinks] Invalid URL");
         return NO;
