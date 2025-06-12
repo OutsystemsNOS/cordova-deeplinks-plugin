@@ -1,4 +1,4 @@
-var PLUGIN_NAME = "Deeplinks";
+var PLUGIN_NAME = "CustomDeeplinks";
 
 window.Deeplinks = {
     onDeepLink: function (url) {
