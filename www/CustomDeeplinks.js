@@ -1,30 +1,28 @@
-var PLUGIN_NAME = "CustomDeeplinks";
+var exec = require('cordova/exec');
+var PLUGIN_NAME = 'CustomDeeplinks';
 
-window.CustomDeeplinks = {
-    onDeepLink: function (url) {
-        const event = new CustomEvent("deeplinks", { detail: { url } });
-        window.dispatchEvent(event);
-    }
-};
+module.exports = {
+  onDeepLink: function (url) {
+    var event = new CustomEvent('deeplinks', { detail: { url: url } });
+    window.dispatchEvent(event);
+  },
 
-window.CustomDeeplinks.getPendingDeeplink = function (callback) {
-    if (!window.cordova || !cordova.exec) {
-        console.warn("Cordova not ready");
-        callback(null);
-        return;
-    }
-    cordova.exec(
-        function (url) {
-            if (typeof callback === 'function') {
-                callback(url);
-            }
-        },
-        function (err) {
-            console.error("Cannot get pending deeplink:", err);
-            callback(null);
-        },
-        "CustomDeeplinks",
-        "getPendingDeeplink",
-        []
+  getPendingDeeplink: function (callback) {
+    exec(
+      function (url) {
+        if (typeof callback === 'function') {
+          callback(url);
+        }
+      },
+      function (err) {
+        console.error('Cannot get pending deeplink:', err);
+        if (typeof callback === 'function') {
+          callback(null);
+        }
+      },
+      PLUGIN_NAME,
+      'getPendingDeeplink',
+      []
     );
+  }
 };
