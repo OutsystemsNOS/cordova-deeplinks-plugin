@@ -1,13 +1,13 @@
 var PLUGIN_NAME = "CustomDeeplinks";
 
-window.CustomDeeplinksPlugin = {
+window.CustomDeeplinks = {
     onDeepLink: function (url) {
         const event = new CustomEvent("deeplinks", { detail: { url } });
         window.dispatchEvent(event);
     }
 };
 
-window.CustomDeeplinksPlugin.getPendingDeeplink = function (callback) {
+window.CustomDeeplinks.getPendingDeeplink = function (callback) {
     if (!window.cordova || !cordova.exec) {
         console.warn("Cordova not ready");
         callback(null);
