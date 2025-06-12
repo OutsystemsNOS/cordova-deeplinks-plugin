@@ -1,6 +1,6 @@
 var PLUGIN_NAME = "CustomDeeplinks";
 
-window.Deeplinks = {
+window.CustomDeeplinks = {
     onDeepLink: function (url) {
         const event = new CustomEvent("deeplinks", { detail: { url } });
         window.dispatchEvent(event);
