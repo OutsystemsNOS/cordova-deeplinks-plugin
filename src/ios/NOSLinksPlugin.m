@@ -2,18 +2,20 @@
 
 @implementation NOSLinksPlugin
 
+static NSString *pendingURL = nil;
+
 - (BOOL)handleUserActivity:(NSUserActivity *)userActivity {
-    if (userActivity.webpageURL == nil) {
-        NSLog(@"[NOSLinks] No URL to handle.");
-        return NO;
-    }
+    if (userActivity.webpageURL == nil) return NO;
 
     NSString *urlString = userActivity.webpageURL.absoluteString;
     NSLog(@"[NOSLinks] Handling universal link: %@", urlString);
 
-    NSString *js = [NSString stringWithFormat:@"window.NOSLinks && window.NOSLinks.onDeepLink && window.NOSLinks.onDeepLink('%@');",urlString];
-    
-    [self.commandDelegate evalJs:js];
+    pendingURL = urlString;
+
+    if (self.webViewEngine && self.webViewEngine.engineWebView) {NSString *js = [NSString stringWithFormat:@"window.NOSLinks && window.NOSLinks.onDeepLink && window.NOSLinks.onDeepLink('%@');", urlString];
+        [self.commandDelegate evalJs:js];
+        NSLog(@"[NOSLinks] Fire universal link: %@", urlString);
+    }
 
     return YES;
 }
