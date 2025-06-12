@@ -32,4 +32,20 @@ static NSString *pendingURL = nil;
     return YES;
 }
 
+- (void)getPendingDeeplink:(CDVInvokedUrlCommand *)command {
+    if (pendingURL != nil) {
+        NSLog(@"[CustomDeeplinks] Returning pending URL: %@", pendingURL);
+        
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:pendingURL];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+
+        pendingURL = nil;
+    } else {
+        NSLog(@"[CustomDeeplinks] No pending URL");
+        
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_NO_RESULT];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+    }
+}
+
 @end
