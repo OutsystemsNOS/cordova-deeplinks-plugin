@@ -2,7 +2,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface NOSLinksPlugin : CDVPlugin
+@interface DeeplinksPlugin : CDVPlugin
 
 - (BOOL)handleUserActivity:(NSUserActivity *)userActivity;
 
