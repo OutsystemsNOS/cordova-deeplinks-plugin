@@ -2,6 +2,6 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
-@interface AppDelegate (DeeplinksPlugin)
+@interface AppDelegate (CustomDeeplinksPlugin)
 
 @end
