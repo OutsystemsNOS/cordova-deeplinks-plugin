@@ -91,13 +91,9 @@ Also handles universal link routing inside the `AppDelegate`.
 ## 🧪 Example Test Link
 
 ```
-https://dlapp.nos.pt/alguma-rota
+https://<your app host>/some page
 ```
-
-## 📝 License
-
-MIT
 
 ---
 
-Developed and maintained by [Seu Nome ou Organização](https://github.com/SEU_USUARIO)
+Developed and maintained by [MiguelRosaDev](https://github.com/MiguelRosaDev)
