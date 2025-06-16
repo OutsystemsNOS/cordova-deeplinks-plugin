@@ -20,7 +20,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <preference name="APP_PATHPATTERN" default="/" />
 
     <platform name="android">
-        <source-file src="src/android/CustomDeeplinksPlugin.java" target-dir="src/com/cordova/deeplinks/plugin" />
                
         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity[@android:name='MainActivity']">
             <intent-filter android:autoVerify="true">
@@ -32,6 +31,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 <data android:pathPrefix="$APP_PATHPATTERN" />
             </intent-filter>
         </config-file>
+
+        <source-file src="src/android/CustomDeeplinksPlugin.java" target-dir="src/com/cordova/deeplinks/plugin" />
     </platform>
            
     <platform name="ios">
