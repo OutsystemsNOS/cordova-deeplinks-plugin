@@ -22,7 +22,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <platform name="android">
         <source-file src="src/android/CustomDeeplinksPlugin.java" target-dir="src/com/cordova/deeplinks/plugin" />
                
-        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity[@android:name='MainActivity']">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
