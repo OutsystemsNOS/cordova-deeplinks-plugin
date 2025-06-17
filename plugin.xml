@@ -15,7 +15,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                <clobbers target="CustomDeeplinks" />
     </js-module>
            
-    <preference name="APP_HOST" default="domain_url_prefix" />
+    <preference name="APP_HOST" default="app_host" />
     <preference name="APP_SCHEME" default="/" />
     <preference name="APP_PATHPATTERN" default="/" />
            
