@@ -20,6 +20,13 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <preference name="APP_PATHPATTERN" default="/" />
 
     <platform name="android">
+         <hook type="after_prepare" src="hooks/android/androidCopyPreferences.js" />
+         <config-file parent="/*" target="config.xml">
+            <preference name="DOMAIN_URI_PREFIX" value="https://$APP_HOST"/>
+            <feature name="FirebaseDynamicLinks">
+                <param name="ios-package" value="FirebaseDynamicLinksPlugin" />
+            </feature>
+        </config-file>
                
         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
             <intent-filter android:autoVerify="true">
