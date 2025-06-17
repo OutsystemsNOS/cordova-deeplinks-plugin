@@ -8,7 +8,7 @@ module.exports = function (context) {
     var projectRoot = context.opts.cordova.project ? context.opts.cordova.project.root : context.opts.projectRoot;
     var configXML = path.join(projectRoot, 'config.xml');
     var configParser = new ConfigParser(configXML);
-    var app_domain_name = configParser.getGlobalPreference("DOMAIN_URL_PREFIX");
+    var app_domain_name = configParser.getGlobalPreference("APP_HOST");
 
     //ANDROID
     //go inside the AndroidManifest and change value for APP_DOMAIN_NAME
@@ -16,7 +16,7 @@ module.exports = function (context) {
     var manifestFile = fs.readFileSync(manifestPath).toString();
     var etreeManifest = et.parse(manifestFile);
 
-    var dataTags = etreeManifest.findall('./application/activity/intent-filter/data[@android:host="domain_url_prefix"]');
+    var dataTags = etreeManifest.findall('./application/activity/intent-filter/data[@android:host="app_host"]');
     for (var i = 0; i < dataTags.length; i++) {
         var data = dataTags[i];
         data.set("android:host", app_domain_name);
@@ -28,8 +28,8 @@ module.exports = function (context) {
     //change the config.xml
     var configAndroidPath = path.join(projectRoot, 'platforms/android/app/src/main/res/xml/config.xml');
     var configAndroidParser = new ConfigParser(configAndroidPath);
-    var oldDomainUriPrefix = configAndroidParser.getGlobalPreference("domain_url_prefix");
-    var newDomainUriPrefix = oldDomainUriPrefix.replace('domain_url_prefix', app_domain_name);
+    var oldDomainUriPrefix = configAndroidParser.getGlobalPreference("DOMAIN_URI_PREFIX");
+    var newDomainUriPrefix = oldDomainUriPrefix.replace('app_host', app_domain_name);
     configAndroidParser.setGlobalPreference("DOMAIN_URI_PREFIX", newDomainUriPrefix);
     configAndroidParser.write();
 
