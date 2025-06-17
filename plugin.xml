@@ -28,7 +28,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="https" />
                 <data android:host="dlapp.nos.pt" />
-                <data android:pathPrefix="/dl" />
+                <data android:pathPattern="/dl" />
             </intent-filter>
         </config-file>
 
