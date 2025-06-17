@@ -15,9 +15,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                <clobbers target="CustomDeeplinks" />
     </js-module>
            
-    <preference name="APP_HOST" default="dlapp.nos.pt" />
-    <preference name="APP_SCHEME" default="https" />
-    <preference name="APP_PATHPATTERN" default="/dl.*" />
+    <preference name="APP_HOST" default="/" />
+    <preference name="APP_SCHEME" default="/" />
+    <preference name="APP_PATHPATTERN" default="/" />
 
     <platform name="android">
                
@@ -26,9 +26,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="$APP_SCHEME" />
-                <data android:host="$APP_HOST" />
-                <data android:pathPattern="$APP_PATHPATTERN" />
+                <data android:scheme="https" />
+                <data android:host="dlapp.nos.pt" />
+                <data android:pathPattern="/dl.*" />
             </intent-filter>
         </config-file>
 
