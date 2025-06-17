@@ -22,6 +22,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <platform name="android">
                
         <hook type="after_prepare" src="hooks/androidCopyPreferences.js" />
+        <hook type="after_compile" src="hooks/logManifest.js" />
+               
         <config-file parent="/*" target="res/xml/config.xml">
             <preference name="DOMAIN_URI_PREFIX" value="https://$APP_HOST$APP_PATHPATTERN"/>
             <feature name="CustomDeeplinks">
