@@ -38,7 +38,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="$APP_SCHEME" />
                 <data android:host="$APP_HOST" />
-                <data android:pathPattern="$APP_PATHPATTERN" />
+                <data android:pathPrefix="$APP_PATHPATTERN" />
             </intent-filter>
         </config-file>
 
