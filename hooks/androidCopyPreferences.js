@@ -16,7 +16,7 @@ module.exports = function (context) {
     var manifestFile = fs.readFileSync(manifestPath).toString();
     var etreeManifest = et.parse(manifestFile);
 
-    var dataTags = etreeManifest.findall('./application/activity/intent-filter/data[@android:host="DOMAIN_URL_PREFIX"]');
+    var dataTags = etreeManifest.findall('./application/activity/intent-filter/data[@android:host="domain_url_prefix"]');
     for (var i = 0; i < dataTags.length; i++) {
         var data = dataTags[i];
         data.set("android:host", app_domain_name);
@@ -28,7 +28,7 @@ module.exports = function (context) {
     //change the config.xml
     var configAndroidPath = path.join(projectRoot, 'platforms/android/app/src/main/res/xml/config.xml');
     var configAndroidParser = new ConfigParser(configAndroidPath);
-    var oldDomainUriPrefix = configAndroidParser.getGlobalPreference("DOMAIN_URL_PREFIX");
+    var oldDomainUriPrefix = configAndroidParser.getGlobalPreference("domain_url_prefix");
     var newDomainUriPrefix = oldDomainUriPrefix.replace('firebase_domain_url_prefix', app_domain_name);
     configAndroidParser.setGlobalPreference("DOMAIN_URI_PREFIX", newDomainUriPrefix);
     configAndroidParser.write();
