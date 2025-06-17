@@ -21,7 +21,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
     <platform name="android">
                
-        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity[@android:name='MainActivity']">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
