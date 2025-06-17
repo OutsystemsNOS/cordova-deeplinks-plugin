@@ -18,6 +18,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <preference name="APP_HOST" default="domain_url_prefix" />
     <preference name="APP_SCHEME" default="/" />
     <preference name="APP_PATHPATTERN" default="/" />
+           
+    <!--Android preference only, used in hook-->
+    <preference name="DOMAIN_URI_PREFIX" value="https://$APP_HOST$APP_PATHPATTERN"/>
 
     <platform name="android">
         <hook type="after_prepare" src="hooks/android/androidCopyPreferences.js" />
