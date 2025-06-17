@@ -18,11 +18,16 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <preference name="APP_HOST" default="app_host" />
     <preference name="APP_SCHEME" default="/" />
     <preference name="APP_PATHPATTERN" default="/" />
-           
-    <!--Android preference only, used in hook-->
-    <preference name="DOMAIN_URI_PREFIX" value="https://$APP_HOST$APP_PATHPATTERN"/>
 
     <platform name="android">
+
+        <config-file parent="/*" target="res/xml/config.xml">
+            <preference name="DOMAIN_URI_PREFIX" value="https://$APP_HOST$APP_PATHPATTERN"/>
+            <feature name="CustomDeeplinks">
+                <param name="android-package" value="by.cordova.deeplinks.CustomDeeplinksPlugin" />
+            </feature>
+        </config-file>
+               
         <hook type="after_prepare" src="hooks/android/androidCopyPreferences.js" />
                
         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
