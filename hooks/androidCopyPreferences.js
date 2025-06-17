@@ -33,10 +33,10 @@ module.exports = function (context) {
     configAndroidParser.setGlobalPreference("DOMAIN_URI_PREFIX", newDomainUriPrefix);
     configAndroidParser.write();
 
-    console.log('[CustomDeeplinks] AndroidManifest.xml atualizado com sucesso. Estado atual:');
-    console.log(resultXmlManifest);
+    //console.log('[CustomDeeplinks] AndroidManifest.xml atualizado com sucesso. Estado atual:');
+    //console.log(resultXmlManifest);
 
-    console.log('[CustomDeeplinks] DOMAIN_URI_PREFIX updated in config.xml - Android:');
-    console.log(`New value: ${newDomainUriPrefix}`);
+    //console.log('[CustomDeeplinks] DOMAIN_URI_PREFIX updated in config.xml - Android:');
+    //console.log(`New value: ${newDomainUriPrefix}`);
 
 };
