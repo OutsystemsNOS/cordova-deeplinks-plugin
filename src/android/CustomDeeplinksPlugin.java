@@ -30,7 +30,7 @@ public class CustomDeeplinksPlugin extends CordovaPlugin {
             Log.d(TAG, "Detected cold start with URL: " + pendingURL);
 
             fireDeepLinkToJS(pendingURL);
-            pendingURL = null;
+            //pendingURL = null;
         }
     }
 
