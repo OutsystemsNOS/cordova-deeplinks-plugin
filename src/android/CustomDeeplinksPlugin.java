@@ -4,6 +4,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.PluginResult;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import org.apache.cordova.CordovaPlugin;
 
 public class CustomDeeplinksPlugin extends CordovaPlugin {
