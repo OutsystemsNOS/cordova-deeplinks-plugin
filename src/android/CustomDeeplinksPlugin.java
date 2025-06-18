@@ -27,6 +27,23 @@ public class CustomDeeplinksPlugin extends CordovaPlugin {
     }
 
     @Override
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        if ("getPendingDeeplink".equals(action)) {
+            if (pendingURL != null) {
+                Log.d(TAG, "Returning pending URL: " + pendingURL);
+                callbackContext.success(pendingURL);
+                pendingURL = null;
+            } else {
+                Log.d(TAG, "No pending URL");
+                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.NO_RESULT));
+            }
+            return true;
+        }
+    
+        return false;
+    }
+
+    @Override
     public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (intent != null && intent.getData() != null) {
