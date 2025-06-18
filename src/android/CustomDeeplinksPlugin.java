@@ -57,6 +57,7 @@ public class CustomDeeplinksPlugin extends CordovaPlugin {
         if (intent != null && intent.getData() != null) {
             String url = intent.getData().toString();
             Log.d(TAG, "Received deep link (warm): " + url);
+            pendingURL = url;
             fireDeepLinkToJS(url);
         }
     }
