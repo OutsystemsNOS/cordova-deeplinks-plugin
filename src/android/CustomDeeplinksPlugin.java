@@ -10,9 +10,6 @@ import org.apache.cordova.PluginResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import org.apache.cordova.CordovaPlugin;
 
 public class CustomDeeplinksPlugin extends CordovaPlugin {
 
@@ -28,8 +25,6 @@ public class CustomDeeplinksPlugin extends CordovaPlugin {
             Uri data = intent.getData();
             pendingURL = data.toString();
             Log.d(TAG, "Detected cold start with URL: " + pendingURL);
-
-            //fireDeepLinkToJS(pendingURL);
         }
     }
 
@@ -46,7 +41,7 @@ public class CustomDeeplinksPlugin extends CordovaPlugin {
             }
             return true;
         }
-    
+
         return false;
     }
 
@@ -57,14 +52,14 @@ public class CustomDeeplinksPlugin extends CordovaPlugin {
             String url = intent.getData().toString();
             Log.d(TAG, "Received deep link (warm): " + url);
             pendingURL = url;
-            fireDeepLinkToJS(url);
+            fireDeepLinkToJS(url);  
         }
     }
 
     private void fireDeepLinkToJS(String url) {
         if (webView != null) {
             String escaped = url.replace("'", "\\'");
-            String js = "window.CustomDeeplinksPlugin && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('" + escaped + "');";
+            String js = "window.CustomDeeplinks && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('" + escaped + "');";
             webView.getEngine().evaluateJavascript(js, null);
             Log.d(TAG, "Dispatched JS event with URL: " + url);
         } else {
