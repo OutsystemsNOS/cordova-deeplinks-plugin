@@ -13,7 +13,7 @@ To ensure deep links work properly with **App Links (Android)** and **Universal 
 - `https://<your-domain>/.well-known/apple-app-site-association` (iOS)
 
 > These files must be publicly accessible and contain the correct app association data.  
-> See the [official Android documentation](https://developer.android.com/training/app-links/verify-site-associations) and [Apple documentation](https://developer.apple.com/documentation/xcode/supporting-associated-domains) for more details.
+> See the [official Android documentation](https://developer.android.com/training/app-links/deep-linking) and [Apple documentation](https://developer.apple.com/documentation/xcode/supporting-associated-domains) for more details.
 
 ---
 
