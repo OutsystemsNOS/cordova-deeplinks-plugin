@@ -3,6 +3,20 @@
 
 Cordova plugin to handle **universal links** and **deep links** on Android and iOS, with automatic event dispatch and support for retrieving pending links on app launch.
 
+---
+
+## ⚠️ Important Requirements
+
+To ensure deep links work properly with **App Links (Android)** and **Universal Links (iOS)**, your domain **must** be correctly configured with the following files:
+
+- `https://<your-domain>/.well-known/assetlinks.json` (Android)
+- `https://<your-domain>/.well-known/apple-app-site-association` (iOS)
+
+> These files must be publicly accessible and contain the correct app association data.  
+> See the [official Android documentation](https://developer.android.com/training/app-links/verify-site-associations) and [Apple documentation](https://developer.apple.com/documentation/xcode/supporting-associated-domains) for more details.
+
+---
+
 ## 📦 Installation
 
 Install the plugin via the Cordova CLI:
