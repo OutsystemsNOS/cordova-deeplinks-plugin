@@ -31,19 +31,19 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             </feature>
         </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity[@android:name='.MainActivity']">
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="https" android:host="$APP_HOST" android:pathPrefix="$APP_PATHPATTERN" />
-                <data android:scheme="http" android:host="$APP_HOST" android:pathPrefix="$APP_PATHPATTERN" />
-            </intent-filter>
-        </config-file>
-
-        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='.MainActivity']">
-            <activity android:exported="true" />
-        </edit-config>
+           <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[contains(@android:name, 'MainActivity')]">
+               <activity android:exported="true" />
+           </edit-config>
+           
+           <config-file target="AndroidManifest.xml" parent="/manifest/application/activity[contains(@android:name, 'MainActivity')]">
+               <intent-filter android:autoVerify="true">
+                   <action android:name="android.intent.action.VIEW"/>
+                   <category android:name="android.intent.category.DEFAULT"/>
+                   <category android:name="android.intent.category.BROWSABLE"/>
+                   <data android:scheme="https" android:host="$APP_HOST" android:pathPrefix="$APP_PATHPATTERN" />
+                   <data android:scheme="http" android:host="$APP_HOST" android:pathPrefix="$APP_PATHPATTERN" />
+               </intent-filter>
+           </config-file>
 
         <!--       
         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
