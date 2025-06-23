@@ -32,7 +32,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         </config-file>
 
            <config-file target="AndroidManifest.xml" parent="/manifest/application">
-               <activity android:exported="true">
+               <activity android:exported="true"
+                         android:theme="@android:style/Theme.NoDisplay">
                    <intent-filter android:autoVerify="true">
                        <action android:name="android.intent.action.VIEW" />
                        <category android:name="android.intent.category.DEFAULT" />
