@@ -24,7 +24,7 @@ public class CustomDeeplinksActivity extends Activity {
                 Log.w(TAG, "Received intent with no data");
             }
 
-            // Redireciona para MainActivity
+            // Go to the MainActivity
             Intent launchIntent = new Intent(this, MainActivity.class);
             launchIntent.setAction(Intent.ACTION_VIEW);
             launchIntent.setData(data);
@@ -34,7 +34,7 @@ public class CustomDeeplinksActivity extends Activity {
         } catch (Exception e) {
             Log.e(TAG, "Error handling deep link intent", e);
         } finally {
-            finish(); // Garante que esta activity termina sempre
+            finish(); 
         }
     }
 }
