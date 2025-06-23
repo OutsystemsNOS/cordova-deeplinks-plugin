@@ -24,17 +24,18 @@ public class CustomDeeplinksActivity extends Activity {
                 Log.w(TAG, "Received intent with no data");
             }
 
-            // Go to the MainActivity
-            Intent launchIntent = new Intent(this, MainActivity.class);
-            launchIntent.setAction(Intent.ACTION_VIEW);
+            // Redirect to mainactivity
+            Intent launchIntent = new Intent(Intent.ACTION_MAIN);
+            launchIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+            launchIntent.setPackage(getPackageName());
             launchIntent.setData(data);
             launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
             startActivity(launchIntent);
+
         } catch (Exception e) {
             Log.e(TAG, "Error handling deep link intent", e);
         } finally {
-            finish(); 
+            finish();
         }
     }
 }
