@@ -46,6 +46,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
            </config-file>
 
         <source-file src="src/android/CustomDeeplinksPlugin.java" target-dir="src/com/cordova/deeplinks/plugin" />
+        <source-file src="src/android/CustomDeeplinksPlugin.java" target-dir="src/com/cordova/deeplinks/plugin" />
     </platform>
            
     <platform name="ios">
