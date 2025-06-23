@@ -31,6 +31,10 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             </feature>
         </config-file>
 
+        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='.MainActivity']">
+            <activity android:exported="true" />
+        </edit-config>
+
         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW"/>
