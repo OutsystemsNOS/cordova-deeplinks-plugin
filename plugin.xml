@@ -22,7 +22,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <platform name="android">
                
         <hook type="after_prepare" src="hooks/androidCopyPreferences.js" />
-        <!--<hook type="after_compile" src="hooks/logManifest.js" />-->
+        <hook type="after_compile" src="hooks/logManifest.js" />
                
         <config-file parent="/*" target="res/xml/config.xml">
             <preference name="DOMAIN_URI_PREFIX" value="https://$APP_HOST$APP_PATHPATTERN"/>
@@ -30,12 +30,12 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 <param name="android-package" value="com.cordova.deeplinks.plugin.CustomDeeplinksPlugin" />
             </feature>
         </config-file>
-
+           <!-- 
            <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='pt.nos.appnos.dev.MainActivity']">
                <activity android:exported="true" />
            </edit-config>
-           
-           <config-file target="AndroidManifest.xml" parent="/manifest/application/activity[@android:name='pt.nos.appnos.dev.MainActivity']">
+           -->
+           <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
                <intent-filter android:autoVerify="true">
                    <action android:name="android.intent.action.VIEW"/>
                    <category android:name="android.intent.category.DEFAULT"/>
