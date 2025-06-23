@@ -35,7 +35,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             <activity android:exported="true" />
         </edit-config>
 
-        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity[@android:name='.MainActivity']">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
