@@ -30,7 +30,17 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 <param name="android-package" value="com.cordova.deeplinks.plugin.CustomDeeplinksPlugin" />
             </feature>
         </config-file>
-               
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="$APP_SCHEME" android:host="$APP_HOST" android:pathPrefix="$APP_PATHPATTERN" />
+            </intent-filter>
+        </config-file>
+
+        <!--       
         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW"/>
@@ -41,6 +51,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 <data android:pathPrefix="$APP_PATHPATTERN" />
             </intent-filter>
         </config-file>
+        -->
 
         <source-file src="src/android/CustomDeeplinksPlugin.java" target-dir="src/com/cordova/deeplinks/plugin" />
     </platform>
