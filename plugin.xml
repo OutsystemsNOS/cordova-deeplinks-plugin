@@ -32,9 +32,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         </config-file>
 
            <config-file target="AndroidManifest.xml" parent="/manifest/application">
-               <activity
-                   android:name="com.cordova.deeplinks.plugin.CustomDeeplinksActivity"
-                   android:exported="true">
+               <activity android:exported="true">
                    <intent-filter android:autoVerify="true">
                        <action android:name="android.intent.action.VIEW" />
                        <category android:name="android.intent.category.DEFAULT" />
