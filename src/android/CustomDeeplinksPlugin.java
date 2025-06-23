@@ -19,11 +19,16 @@ public class CustomDeeplinksPlugin extends CordovaPlugin {
     @Override
     protected void pluginInitialize() {
         Log.d(TAG, "Plugin initialized");
-
+    
         Intent intent = cordova.getActivity().getIntent();
-        if (intent != null && intent.getData() != null) {
-            Uri data = intent.getData();
-            pendingURL = data.toString();
+        String url = intent.getStringExtra("deeplink_url");
+    
+        if (url == null && intent.getData() != null) {
+            url = intent.getData().toString();
+        }
+    
+        if (url != null) {
+            pendingURL = url;
             Log.d(TAG, "Detected cold start with URL: " + pendingURL);
         }
     }
