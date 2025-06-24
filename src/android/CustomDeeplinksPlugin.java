@@ -50,16 +50,28 @@ public class CustomDeeplinksPlugin extends CordovaPlugin {
         return false;
     }
 
-    @Override
-    public void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        if (intent != null && intent.getData() != null) {
-            String url = intent.getData().toString();
-            Log.d(TAG, "Received deep link (warm): " + url);
-            pendingURL = url;
-            fireDeepLinkToJS(url);  
-        }
+@Override
+public void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+
+    if (intent == null) return;
+
+    String url = null;
+    if (intent.hasExtra("deeplink_url")) {
+        url = intent.getStringExtra("deeplink_url");
+        Log.d(TAG, "Received deeplink from extra: " + url);
     }
+    if (url == null && intent.getData() != null) {
+        url = intent.getData().toString();
+        Log.d(TAG, "Received deeplink from data: " + url);
+    }
+    if (url != null) {
+        pendingURL = url;
+        fireDeepLinkToJS(url);
+    } else {
+        Log.d(TAG, "No URL found in intent");
+    }
+}
 
     private void fireDeepLinkToJS(String url) {
         if (webView != null) {
