@@ -22,7 +22,7 @@ To ensure deep links work properly with **App Links (Android)** and **Universal 
 Install the plugin via the Cordova CLI:
 
 ```bash
-cordova plugin add [https://github.com/MiguelRosaDev/cordova-custom-deeplinks-plugin.git](https://github.com/MiguelRosaDev/cordova-deeplinks-plugin) \
+cordova plugin add https://github.com/MiguelRosaDev/cordova-deeplinks-plugin \
   --variable APP_SCHEME=https \
   --variable APP_HOST=your domain \
   --variable APP_PATHPATTERN=".*"
