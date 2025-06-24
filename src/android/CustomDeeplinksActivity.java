@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.content.Context;
 
 public class CustomDeeplinksActivity extends Activity {
 
@@ -24,7 +25,7 @@ public class CustomDeeplinksActivity extends Activity {
                 Log.w(TAG, "Received intent with no data");
             }
 
-            Context context = cordova.getActivity();
+            Context context = this;
             String packageName = context.getPackageName();
             Class<?> mainActivityClass = Class.forName(packageName + ".MainActivity");
 
