@@ -24,8 +24,12 @@ public class CustomDeeplinksActivity extends Activity {
                 Log.w(TAG, "Received intent with no data");
             }
 
+            Context context = cordova.getActivity();
+            String packageName = context.getPackageName();
+            Class<?> mainActivityClass = Class.forName(packageName + ".MainActivity");
+
             // Send deeplink to MainActivity
-            Intent launchIntent = new Intent(this, MainActivity.class);
+            Intent launchIntent = new Intent(this, mainActivityClass);
             launchIntent.setAction(Intent.ACTION_MAIN);
             launchIntent.addCategory(Intent.CATEGORY_LAUNCHER);
             if (data != null) {
