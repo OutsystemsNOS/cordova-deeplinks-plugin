@@ -74,17 +74,22 @@ document.addEventListener('deviceready', function () {
 
 ## 🛠 Android Configuration
 
-The plugin injects an `<intent-filter>` into `AndroidManifest.xml`:
+The plugin injects an `<intent-filter>` into `AndroidManifest.xml` with a new activity CustomDeeplinksActivity:
 
 ```xml
-<intent-filter android:autoVerify="true">
-  <action android:name="android.intent.action.VIEW"/>
-  <category android:name="android.intent.category.DEFAULT"/>
-  <category android:name="android.intent.category.BROWSABLE"/>
-  <data android:scheme="https" />
-  <data android:host="app host" />
-  <data android:pathPattern=".*" />
-</intent-filter>
+ <config-file target="AndroidManifest.xml" parent="/manifest/application">
+     <activity android:exported="true"
+               android:name="com.cordova.deeplinks.plugin.CustomDeeplinksActivity"
+               android:theme="@android:style/Theme.NoDisplay">
+         <intent-filter android:autoVerify="true">
+             <action android:name="android.intent.action.VIEW" />
+             <category android:name="android.intent.category.DEFAULT" />
+             <category android:name="android.intent.category.BROWSABLE" />
+             <data android:scheme="https" android:host="$APP_HOST" android:pathPrefix="$APP_PATHPATTERN" />
+             <data android:scheme="http" android:host="$APP_HOST" android:pathPrefix="$APP_PATHPATTERN" />
+         </intent-filter>
+     </activity>
+ </config-file>
 ```
 
 Make sure your domain is properly verified for **App Links** in your assetlinks.json.
