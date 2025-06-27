@@ -27,7 +27,6 @@ static NSString *pendingURL = nil;
         NSString *js = [NSString stringWithFormat:@"window.CustomDeeplinks && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('%@');", escapedURL];
         [self.commandDelegate evalJs:js];
         NSLog(@"[CustomDeeplinks] Fire universal link immediately: %@", urlString);
-        pendingURL = nil;
     }
 
     return YES;
