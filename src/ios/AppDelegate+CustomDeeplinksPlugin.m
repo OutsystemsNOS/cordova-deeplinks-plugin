@@ -19,7 +19,6 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
 
     [CustomDeeplinksPlugin setPendingURL:urlString];
 
-    // MODIFICAÇÃO: Verificação segura da instância do plugin
     if (self.viewController != nil) {
         CustomDeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"CustomDeeplinks"];
         if (plugin != nil) {
