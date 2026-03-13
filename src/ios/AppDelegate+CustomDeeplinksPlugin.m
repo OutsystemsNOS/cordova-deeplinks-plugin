@@ -15,9 +15,14 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
         return NO;
     }
 
+    // MODIFICAÇÃO: Guarda a URL na variável estática antes de tentar obter a instância (Fix Cold Start)
+    [CustomDeeplinksPlugin setPendingURL:userActivity.webpageURL.absoluteString];
+
     CustomDeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"CustomDeeplinks"];
     if (plugin == nil) {
         NSLog(@"[Deeplinks] Plugin not found");
+        // MODIFICAÇÃO: Retornamos YES aqui porque a URL já foi guardada em setPendingURL para uso posterior
+        return YES;
     }
 
     NSLog(@"[CustomDeeplinks] URL: %@", userActivity.webpageURL.absoluteString);
@@ -35,6 +40,9 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
 
     NSLog(@"[CustomDeeplinks] App opened via URL scheme: %@", url.absoluteString);
+
+    // MODIFICAÇÃO: Suporte para URL Schemes no Cold Start
+    [CustomDeeplinksPlugin setPendingURL:url.absoluteString];
 
     return YES;
 }
