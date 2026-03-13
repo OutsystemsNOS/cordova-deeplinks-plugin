@@ -41,7 +41,7 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
 
     NSLog(@"[CustomDeeplinks] App opened via URL scheme: %@", url.absoluteString);
 
-    // MODIFICAÇÃO: Suporte para URL Schemes no Cold Start
+    // Support for URL Schemes in Cold Start
     [CustomDeeplinksPlugin setPendingURL:url.absoluteString];
 
     return YES;
