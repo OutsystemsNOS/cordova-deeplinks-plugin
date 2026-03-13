@@ -21,17 +21,6 @@ static NSString *pendingURL = nil;
 
     NSString *urlString = userActivity.webpageURL.absoluteString;
     pendingURL = urlString;
-
-    // MODIFICAÇÃO: Comentamos o evalJs e a limpeza imediata. 
-    // Vamos confiar APENAS no getPendingDeeplink do seu JS para evitar conflitos.
-    /*
-    if (self.webViewEngine && self.webViewEngine.engineWebView) {
-        NSString *escapedURL = [urlString stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
-        NSString *js = [NSString stringWithFormat:@"window.CustomDeeplinks.onDeepLink('%@');", escapedURL];
-        [self.commandDelegate evalJs:js];
-        pendingURL = nil; 
-    }
-    */
     
     return YES;
 }
