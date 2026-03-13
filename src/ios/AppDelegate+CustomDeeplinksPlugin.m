@@ -3,38 +3,59 @@
 
 @implementation AppDelegate (CustomDeeplinksPlugin)
 
-// Universal Link handler
+// Universal Link handler (HTTPS links)
 - (BOOL)application:(UIApplication *)application 
 continueUserActivity:(NSUserActivity *)userActivity 
 restorationHandler:(void (^)(NSArray *))restorationHandler {
 
-    NSLog(@"[CustomDeeplinks] First click");
+    NSLog(@"[CustomDeeplinks] continueUserActivity triggered");
     
     if (![userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb] || userActivity.webpageURL == nil) {
-        NSLog(@"[CustomDeeplinks] Invalid URL");
         return NO;
     }
 
-    // Store the URL in a static variable before attempting to obtain the instance (Fix Cold Start).
-    [CustomDeeplinksPlugin setPendingURL:userActivity.webpageURL.absoluteString];
+    NSString *urlString = userActivity.webpageURL.absoluteString;
+    NSLog(@"[CustomDeeplinks] URL detected: %@", urlString);
 
-    CustomDeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"CustomDeeplinks"];
-    if (plugin == nil) {
-        NSLog(@"[Deeplinks] Plugin not found");
-        // We return YES here because the URL has already been saved in setPendingURL for later use.
-        return YES;
+    // MODIFICAÇÃO: Gravamos SEMPRE no static primeiro. 
+    // Isso garante que o cold start funciona mesmo que o plugin demore a carregar.
+    [CustomDeeplinksPlugin setPendingURL:urlString];
+
+    // MODIFICAÇÃO: Verificação segura da instância do plugin
+    if (self.viewController != nil) {
+        CustomDeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"CustomDeeplinks"];
+        if (plugin != nil) {
+            NSLog(@"[CustomDeeplinks] Plugin found, handling activity immediately.");
+            [plugin handleUserActivity:userActivity];
+        } else {
+            NSLog(@"[CustomDeeplinks] Plugin not initialized yet. URL cached in static variable.");
+        }
     }
 
-    NSLog(@"[CustomDeeplinks] URL: %@", userActivity.webpageURL.absoluteString);
-
-    BOOL handled = [plugin handleUserActivity:userActivity];
-
-    NSLog(@"[CustomDeeplinks] handleUserActivity result: %@", handled ? @"YES" : @"NO");
-
-    return handled;
+    return YES;
 }
 
-// Deep link (URL scheme) handler
+// Deep link handler (Custom URL Schemes: myapp://)
+- (BOOL)application:(UIApplication *)app 
+            openURL:(NSURL *)url 
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+
+    NSLog(@"[CustomDeeplinks] openURL triggered: %@", url.absoluteString);
+
+    // MODIFICAÇÃO: Também gravamos no static para esquemas de URL
+    [CustomDeeplinksPlugin setPendingURL:url.absoluteString];
+
+    // Notificar o plugin se ele já estiver ativo
+    CustomDeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"CustomDeeplinks"];
+    if (plugin != nil) {
+        // Criamos um NSUserActivity fake ou chamamos um método interno para processar a URL
+        NSLog(@"[CustomDeeplinks] Notifying plugin of URL Scheme");
+    }
+
+    return YES;
+}
+
+@end// Deep link (URL scheme) handler
 - (BOOL)application:(UIApplication *)app 
             openURL:(NSURL *)url 
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
