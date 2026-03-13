@@ -17,7 +17,6 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
     NSString *urlString = userActivity.webpageURL.absoluteString;
     NSLog(@"[CustomDeeplinks] URL detected: %@", urlString);
 
-    // Gravamos no static para garantir Cold Start
     [CustomDeeplinksPlugin setPendingURL:urlString];
 
     if (self.viewController != nil) {
@@ -40,7 +39,6 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
 
     NSLog(@"[CustomDeeplinks] openURL triggered: %@", url.absoluteString);
 
-    // Suporte para URL Schemes no Cold Start
     [CustomDeeplinksPlugin setPendingURL:url.absoluteString];
 
     if (self.viewController != nil) {
