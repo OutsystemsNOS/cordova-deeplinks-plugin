@@ -17,8 +17,6 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
     NSString *urlString = userActivity.webpageURL.absoluteString;
     NSLog(@"[CustomDeeplinks] URL detected: %@", urlString);
 
-    // MODIFICAÇÃO: Gravamos SEMPRE no static primeiro. 
-    // Isso garante que o cold start funciona mesmo que o plugin demore a carregar.
     [CustomDeeplinksPlugin setPendingURL:urlString];
 
     // MODIFICAÇÃO: Verificação segura da instância do plugin
@@ -42,10 +40,8 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
 
     NSLog(@"[CustomDeeplinks] openURL triggered: %@", url.absoluteString);
 
-    // MODIFICAÇÃO: Também gravamos no static para esquemas de URL
     [CustomDeeplinksPlugin setPendingURL:url.absoluteString];
 
-    // Notificar o plugin se ele já estiver ativo
     CustomDeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"CustomDeeplinks"];
     if (plugin != nil) {
         // Criamos um NSUserActivity fake ou chamamos um método interno para processar a URL
