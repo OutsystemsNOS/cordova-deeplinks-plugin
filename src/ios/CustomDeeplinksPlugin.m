@@ -10,7 +10,6 @@ static NSString *pendingURL = nil;
 }
 
 - (void)pluginInitialize {
-    // MODIFICAÇÃO: Removemos TOTALMENTE a limpeza automática aqui.
     if (pendingURL != nil) {
         NSLog(@"[CustomDeeplinks] Plugin initialized. URL waiting: %@", pendingURL);
     }
@@ -26,7 +25,6 @@ static NSString *pendingURL = nil;
 }
 
 - (void)getPendingDeeplink:(CDVInvokedUrlCommand *)command {
-    // Debug para saber o que está na variável no momento da chamada JS
     NSLog(@"[CustomDeeplinks] JS called getPendingDeeplink. Current value: %@", pendingURL);
 
     CDVPluginResult *result;
