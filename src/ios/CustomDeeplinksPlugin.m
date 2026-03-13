@@ -12,11 +12,13 @@ static NSString *pendingURL = nil;
 - (void)pluginInitialize {
     // The immediate clearing of the pendingURL has been removed here to allow JS to consume it via getPendingDeeplink if preferred.
     if (pendingURL != nil) {
+        /*
         NSString *escapedURL = [pendingURL stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
         NSString *js = [NSString stringWithFormat:@"window.CustomDeeplinks && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('%@');", escapedURL];
         [self.commandDelegate evalJs:js];
         NSLog(@"[CustomDeeplinks] Fire pending universal link: %@", pendingURL);
         // pendingURL = nil; // Commented out to avoid race conditions using JS's getPendingDeeplink.
+        */
     }
 }
 
