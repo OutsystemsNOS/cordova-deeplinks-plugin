@@ -17,6 +17,7 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
     NSString *urlString = userActivity.webpageURL.absoluteString;
     NSLog(@"[CustomDeeplinks] URL detected: %@", urlString);
 
+    // Gravamos no static para garantir Cold Start
     [CustomDeeplinksPlugin setPendingURL:urlString];
 
     if (self.viewController != nil) {
@@ -39,25 +40,16 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
 
     NSLog(@"[CustomDeeplinks] openURL triggered: %@", url.absoluteString);
 
+    // Suporte para URL Schemes no Cold Start
     [CustomDeeplinksPlugin setPendingURL:url.absoluteString];
 
-    CustomDeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"CustomDeeplinks"];
-    if (plugin != nil) {
-        NSLog(@"[CustomDeeplinks] Notifying plugin of URL Scheme");
+    if (self.viewController != nil) {
+        CustomDeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"CustomDeeplinks"];
+        if (plugin != nil) {
+            NSLog(@"[CustomDeeplinks] Notifying plugin of URL Scheme");
+            // Se tiveres lógica específica para schemes no plugin, podes chamar aqui
+        }
     }
-
-    return YES;
-}
-
-@end// Deep link (URL scheme) handler
-- (BOOL)application:(UIApplication *)app 
-            openURL:(NSURL *)url 
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-
-    NSLog(@"[CustomDeeplinks] App opened via URL scheme: %@", url.absoluteString);
-
-    // Support for URL Schemes in Cold Start
-    [CustomDeeplinksPlugin setPendingURL:url.absoluteString];
 
     return YES;
 }
