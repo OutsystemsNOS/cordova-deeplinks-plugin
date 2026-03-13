@@ -15,13 +15,13 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
         return NO;
     }
 
-    // MODIFICAÇÃO: Guarda a URL na variável estática antes de tentar obter a instância (Fix Cold Start)
+    // Store the URL in a static variable before attempting to obtain the instance (Fix Cold Start).
     [CustomDeeplinksPlugin setPendingURL:userActivity.webpageURL.absoluteString];
 
     CustomDeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"CustomDeeplinks"];
     if (plugin == nil) {
         NSLog(@"[Deeplinks] Plugin not found");
-        // MODIFICAÇÃO: Retornamos YES aqui porque a URL já foi guardada em setPendingURL para uso posterior
+        // We return YES here because the URL has already been saved in setPendingURL for later use.
         return YES;
     }
 
