@@ -4,21 +4,15 @@
 
 static NSString *pendingURL = nil;
 
-// Static method to allow the AppDelegate to write the URL without needing the active instance.
 + (void)setPendingURL:(NSString *)url {
     pendingURL = url;
+    NSLog(@"[CustomDeeplinks] Static pendingURL set to: %@", pendingURL);
 }
 
 - (void)pluginInitialize {
-    // The immediate clearing of the pendingURL has been removed here to allow JS to consume it via getPendingDeeplink if preferred.
+    // MODIFICAÇÃO: Removemos TOTALMENTE a limpeza automática aqui.
     if (pendingURL != nil) {
-        /*
-        NSString *escapedURL = [pendingURL stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
-        NSString *js = [NSString stringWithFormat:@"window.CustomDeeplinks && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('%@');", escapedURL];
-        [self.commandDelegate evalJs:js];
-        NSLog(@"[CustomDeeplinks] Fire pending universal link: %@", pendingURL);
-        // pendingURL = nil; // Commented out to avoid race conditions using JS's getPendingDeeplink.
-        */
+        NSLog(@"[CustomDeeplinks] Plugin initialized. URL waiting: %@", pendingURL);
     }
 }
 
@@ -26,36 +20,34 @@ static NSString *pendingURL = nil;
     if (userActivity.webpageURL == nil) return NO;
 
     NSString *urlString = userActivity.webpageURL.absoluteString;
-    NSLog(@"[CustomDeeplinks] Handling universal link: %@", urlString);
-
     pendingURL = urlString;
 
+    // MODIFICAÇÃO: Comentamos o evalJs e a limpeza imediata. 
+    // Vamos confiar APENAS no getPendingDeeplink do seu JS para evitar conflitos.
+    /*
     if (self.webViewEngine && self.webViewEngine.engineWebView) {
         NSString *escapedURL = [urlString stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
-        NSString *js = [NSString stringWithFormat:@"window.CustomDeeplinks && window.CustomDeeplinks.onDeepLink && window.CustomDeeplinks.onDeepLink('%@');", escapedURL];
+        NSString *js = [NSString stringWithFormat:@"window.CustomDeeplinks.onDeepLink('%@');", escapedURL];
         [self.commandDelegate evalJs:js];
-        NSLog(@"[CustomDeeplinks] Fire universal link immediately: %@", urlString);
-        pendingURL = nil;
+        pendingURL = nil; 
     }
-
+    */
+    
     return YES;
 }
 
 - (void)getPendingDeeplink:(CDVInvokedUrlCommand *)command {
-    if (pendingURL != nil) {
-        NSLog(@"[CustomDeeplinks] Returning pending URL: %@", pendingURL);
-        
-        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:pendingURL];
-        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+    // Debug para saber o que está na variável no momento da chamada JS
+    NSLog(@"[CustomDeeplinks] JS called getPendingDeeplink. Current value: %@", pendingURL);
 
-        pendingURL = nil;
+    CDVPluginResult *result;
+    if (pendingURL != nil && ![pendingURL isEqualToString:@""]) {
+        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:pendingURL];
+        pendingURL = nil; // SÓ LIMPA AQUI após entregar ao JS
     } else {
-        NSLog(@"[CustomDeeplinks] No pending URL");
-        
-        // Return OK with nil instead of NO_RESULT to make handling easier in JS.
-        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:nil];
-        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:nil];
     }
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
 @end
