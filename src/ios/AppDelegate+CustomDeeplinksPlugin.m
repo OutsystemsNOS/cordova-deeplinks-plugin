@@ -43,7 +43,6 @@ restorationHandler:(void (^)(NSArray *))restorationHandler {
 
     CustomDeeplinksPlugin *plugin = [self.viewController getCommandInstance:@"CustomDeeplinks"];
     if (plugin != nil) {
-        // Criamos um NSUserActivity fake ou chamamos um método interno para processar a URL
         NSLog(@"[CustomDeeplinks] Notifying plugin of URL Scheme");
     }
 
