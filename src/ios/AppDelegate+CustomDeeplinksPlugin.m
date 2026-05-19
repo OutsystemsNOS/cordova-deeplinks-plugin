@@ -5,7 +5,11 @@
 
 - (void)notifyAppsFlyerWithUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler {
     Class appsFlyerClass = NSClassFromString(@"AppsFlyerLib");
-    if (!appsFlyerClass) return;
+
+    CDVViewController* vc = (CDVViewController*)self.viewController;
+    NSString* enableAppsFlyerDeeplinks = [vc.settings objectForKey:[@"ENABLE_APPSFLYER_DEEEPLINKS" lowercaseString]];
+
+    if (!appsFlyerClass && !enableAppsFlyerDeeplinks) return;
 
     SEL sharedSelector = NSSelectorFromString(@"shared");
     if (![appsFlyerClass respondsToSelector:sharedSelector]) return;
@@ -43,7 +47,10 @@
 
 - (void)notifyAppsFlyerWithURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
     Class appsFlyerClass = NSClassFromString(@"AppsFlyerLib");
-    if (!appsFlyerClass) return;
+    CDVViewController* vc = (CDVViewController*)self.viewController;
+    NSString* enableAppsFlyerDeeplinks = [vc.settings objectForKey:[@"ENABLE_APPSFLYER_DEEEPLINKS" lowercaseString]];
+    
+    if (!appsFlyerClass && !enableAppsFlyerDeeplinks) return;
 
     SEL sharedSelector = NSSelectorFromString(@"shared");
     if (![appsFlyerClass respondsToSelector:sharedSelector]) return;
