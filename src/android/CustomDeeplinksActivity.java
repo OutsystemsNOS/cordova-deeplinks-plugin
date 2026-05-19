@@ -34,7 +34,9 @@ public class CustomDeeplinksActivity extends Activity {
             Class<?> mainActivityClass = Class.forName(packageName + ".MainActivity");
             Intent launchIntent = new Intent(this, mainActivityClass);
 
-            if (hasAppsFlyer && incomingIntent != null) {
+            bool enableAppsFlyerDeeplinks = preferences.getBoolean("ENABLE_APPSFLYER_DEEEPLINKS", false);
+
+            if (hasAppsFlyer && incomingIntent != null && enableAppsFlyerDeeplinks) {
                 launchIntent.setAction(incomingIntent.getAction());
                 launchIntent.setData(incomingIntent.getData());
                 if (incomingIntent.getExtras() != null) {
