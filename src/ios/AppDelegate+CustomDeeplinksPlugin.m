@@ -4,22 +4,23 @@
 @implementation AppDelegate (CustomDeeplinksPlugin)
 
 - (BOOL)isAppsFlyerEnabled {
-    CDVConfigParser* delegate = [[CDVConfigParser alloc] init];
-    NSString* configPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"xml"];
-    NSXMLParser* configParser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL fileURLWithPath:configPath]];
+    NSString *configPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"xml"];
+    if (!configPath) return NO;
+
+    NSData *configData = [NSData dataWithContentsOfFile:configPath];
+    if (!configData) return NO;
+
+    NSString *configString = [[NSString alloc] initWithData:configData encoding:NSUTF8StringEncoding];
     
-    if (configParser == nil) {
-        return NO;
+    // Find preference: name="ENABLE_APPSFLYER_DEEEPLINKS" value="true"
+    NSString *targetPattern = @"name=\"ENABLE_APPSFLYER_DEEEPLINKS\"";
+    
+    if ([configString rangeOfString:targetPattern options:NSCaseInsensitiveSearch].location != NSNotFound) {
+        if ([configString rangeOfString:@"value=\"true\"" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+            return YES;
+        }
     }
     
-    [configParser setDelegate:delegate];
-    [configParser parse];
-    
-    NSString* prefValue = [delegate.settings objectForKey:[@"ENABLE_APPSFLYER_DEEEPLINKS" lowercaseString]];
-    
-    if (prefValue != nil) {
-        return [prefValue boolValue];
-    }
     return NO; 
 }
 
