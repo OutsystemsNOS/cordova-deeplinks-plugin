@@ -3,15 +3,34 @@
 
 @implementation AppDelegate (CustomDeeplinksPlugin)
 
+- (BOOL)isAppsFlyerEnabled {
+    CDVConfigParser* delegate = [[CDVConfigParser alloc] init];
+    NSString* configPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"xml"];
+    NSXMLParser* configParser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL fileURLWithPath:configPath]];
+    
+    if (configParser == nil) {
+        return NO;
+    }
+    
+    [configParser setDelegate:delegate];
+    [configParser parse];
+    
+    NSString* prefValue = [delegate.settings objectForKey:[@"ENABLE_APPSFLYER_DEEEPLINKS" lowercaseString]];
+    
+    if (prefValue != nil) {
+        return [prefValue boolValue];
+    }
+    return NO; 
+}
+
 - (void)notifyAppsFlyerWithUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler {
+    if (![self isAppsFlyerEnabled]) {
+        NSLog(@"[CustomDeeplinks] Forwarding blocked: ENABLE_APPSFLYER_DEEEPLINKS is false");
+        return;
+    }
+    
     Class appsFlyerClass = NSClassFromString(@"AppsFlyerLib");
-
-    CDVViewController* vc = (CDVViewController*)self.viewController;
-
-    NSString* prefValue = [vc.settings objectForKey:[@"ENABLE_APPSFLYER_DEEEPLINKS" lowercaseString]];
-    if (prefValue != nil && ![prefValue boolValue]) { 
-        return; 
-    }    
+    CDVViewController* vc = (CDVViewController*)self.viewController; 
 
     if (!appsFlyerClass) return;
 
@@ -50,13 +69,13 @@
 }
 
 - (void)notifyAppsFlyerWithURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    if (![self isAppsFlyerEnabled]) {
+        NSLog(@"[CustomDeeplinks] Forwarding blocked: ENABLE_APPSFLYER_DEEEPLINKS is false");
+        return;
+    }
+    
     Class appsFlyerClass = NSClassFromString(@"AppsFlyerLib");
     CDVViewController* vc = (CDVViewController*)self.viewController;
-
-    NSString* prefValue = [vc.settings objectForKey:[@"ENABLE_APPSFLYER_DEEEPLINKS" lowercaseString]];
-    if (prefValue != nil && ![prefValue boolValue]) { 
-        return; 
-    }  
     
     if (!appsFlyerClass) return;
 
