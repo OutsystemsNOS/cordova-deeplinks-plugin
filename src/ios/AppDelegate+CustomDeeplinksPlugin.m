@@ -9,12 +9,11 @@
     CDVViewController* vc = (CDVViewController*)self.viewController;
 
     NSString* prefValue = [vc.settings objectForKey:[@"ENABLE_APPSFLYER_DEEEPLINKS" lowercaseString]];
-    BOOL enableAppsFlyerDeeplinks = NO;
-    if (prefValue != nil) {
-        enableAppsFlyerDeeplinks = [prefValue boolValue];
-    }
+    if (prefValue != nil && ![prefValue boolValue]) { 
+        return; 
+    }    
 
-    if (!appsFlyerClass && !enableAppsFlyerDeeplinks) return;
+    if (!appsFlyerClass) return;
 
     SEL sharedSelector = NSSelectorFromString(@"shared");
     if (![appsFlyerClass respondsToSelector:sharedSelector]) return;
@@ -55,12 +54,11 @@
     CDVViewController* vc = (CDVViewController*)self.viewController;
 
     NSString* prefValue = [vc.settings objectForKey:[@"ENABLE_APPSFLYER_DEEEPLINKS" lowercaseString]];
-    BOOL enableAppsFlyerDeeplinks = NO;
-    if (prefValue != nil) {
-        enableAppsFlyerDeeplinks = [prefValue boolValue];
-    }
+    if (prefValue != nil && ![prefValue boolValue]) { 
+        return; 
+    }  
     
-    if (!appsFlyerClass && !enableAppsFlyerDeeplinks) return;
+    if (!appsFlyerClass) return;
 
     SEL sharedSelector = NSSelectorFromString(@"shared");
     if (![appsFlyerClass respondsToSelector:sharedSelector]) return;
