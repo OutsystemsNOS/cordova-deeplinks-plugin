@@ -7,7 +7,12 @@
     Class appsFlyerClass = NSClassFromString(@"AppsFlyerLib");
 
     CDVViewController* vc = (CDVViewController*)self.viewController;
-    NSString* enableAppsFlyerDeeplinks = [vc.settings objectForKey:[@"ENABLE_APPSFLYER_DEEEPLINKS" lowercaseString]];
+
+    NSString* prefValue = [vc.settings objectForKey:[@"ENABLE_APPSFLYER_DEEEPLINKS" lowercaseString]];
+    BOOL enableAppsFlyerDeeplinks = NO;
+    if (prefValue != nil) {
+        enableAppsFlyerDeeplinks = [prefValue boolValue];
+    }
 
     if (!appsFlyerClass && !enableAppsFlyerDeeplinks) return;
 
@@ -48,7 +53,12 @@
 - (void)notifyAppsFlyerWithURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
     Class appsFlyerClass = NSClassFromString(@"AppsFlyerLib");
     CDVViewController* vc = (CDVViewController*)self.viewController;
-    NSString* enableAppsFlyerDeeplinks = [vc.settings objectForKey:[@"ENABLE_APPSFLYER_DEEEPLINKS" lowercaseString]];
+
+    NSString* prefValue = [vc.settings objectForKey:[@"ENABLE_APPSFLYER_DEEEPLINKS" lowercaseString]];
+    BOOL enableAppsFlyerDeeplinks = NO;
+    if (prefValue != nil) {
+        enableAppsFlyerDeeplinks = [prefValue boolValue];
+    }
     
     if (!appsFlyerClass && !enableAppsFlyerDeeplinks) return;
 
