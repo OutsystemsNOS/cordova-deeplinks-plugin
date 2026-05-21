@@ -17,10 +17,11 @@
     
     if ([configString rangeOfString:targetPattern options:NSCaseInsensitiveSearch].location != NSNotFound) {
         if ([configString rangeOfString:@"value=\"true\"" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+            NSLog(@"[CustomDeeplinks] isAppsFlyerEnabled is true");
             return YES;
         }
     }
-    
+    NSLog(@"[CustomDeeplinks] isAppsFlyerEnabled is false");
     return NO; 
 }
 
