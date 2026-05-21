@@ -4,24 +4,47 @@
 @implementation AppDelegate (CustomDeeplinksPlugin)
 
 - (BOOL)isAppsFlyerEnabled {
+    NSLog(@"[CustomDeeplinks] Starting isAppsFlyerEnabled check...");
+
     NSString *configPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"xml"];
-    if (!configPath) return NO;
+    if (!configPath) {
+        NSLog(@"[CustomDeeplinks] ERROR: config.xml path not found in mainBundle!");
+        return NO;
+    }
+    NSLog(@"[CustomDeeplinks] config.xml found at path: %@", configPath);
 
     NSData *configData = [NSData dataWithContentsOfFile:configPath];
-    if (!configData) return NO;
+    if (!configData) {
+        NSLog(@"[CustomDeeplinks] ERROR: Could not read data from config.xml!");
+        return NO;
+    }
 
     NSString *configString = [[NSString alloc] initWithData:configData encoding:NSUTF8StringEncoding];
-    
-    // Find preference: name="ENABLE_APPSFLYER_DEEEPLINKS" value="true"
-    NSString *targetPattern = @"name=\"ENABLE_APPSFLYER_DEEEPLINKS\"";
-    
-    if ([configString rangeOfString:targetPattern options:NSCaseInsensitiveSearch].location != NSNotFound) {
-        if ([configString rangeOfString:@"value=\"true\"" options:NSCaseInsensitiveSearch].location != NSNotFound) {
-            NSLog(@"[CustomDeeplinks] isAppsFlyerEnabled is true");
-            return YES;
-        }
+    if (!configString) {
+        NSLog(@"[CustomDeeplinks] ERROR: Could not convert config.xml data to String!");
+        return NO;
     }
-    NSLog(@"[CustomDeeplinks] isAppsFlyerEnabled is false");
+    
+    NSString *targetPattern = @"ENABLE_APPSFLYER_DEEEPLINKS";
+    NSRange range = [configString rangeOfString:targetPattern options:NSCaseInsensitiveSearch];
+    
+    if (range.location == NSNotFound) {
+        NSLog(@"[CustomDeeplinks] ERROR: Preference ENABLE_APPSFLYER_DEEEPLINKS completely missing from config.xml text!");
+        return NO;
+    }
+    
+    NSLog(@"[CustomDeeplinks] Preference key found in config.xml! Checking value...");
+
+    NSUInteger searchStart = range.location;
+    NSUInteger lengthToSearch = MIN(100, configString.length - searchStart);
+    NSString *subSegment = [configString substringWithRange:NSMakeRange(searchStart, lengthToSearch)];
+    
+    if ([subSegment rangeOfString:@"value=\"true\"" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+        NSLog(@"[CustomDeeplinks] SUCCESS: isAppsFlyerEnabled is true");
+        return YES;
+    }
+
+    NSLog(@"[CustomDeeplinks] SUCCESS: isAppsFlyerEnabled is false (value is not true)");
     return NO; 
 }
 
