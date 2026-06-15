@@ -16,6 +16,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     </js-module>
            
     <preference name="APP_HOST" default="app_host" />
+    <preference name="APP_HOST_BRANDED" default="app_host_branded" />
     <preference name="APP_SCHEME" default="/" />
     <preference name="APP_PATHPATTERN" default="/" />
     <preference name="ENABLE_APPSFLYER_DEEEPLINKS" default="false" />
@@ -42,6 +43,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                        <category android:name="android.intent.category.BROWSABLE" />
                        <data android:scheme="https" android:host="$APP_HOST" android:pathPrefix="$APP_PATHPATTERN" />
                        <data android:scheme="http" android:host="$APP_HOST" android:pathPrefix="$APP_PATHPATTERN" />
+                       <data android:scheme="https" android:host="$APP_HOST_BRANDED" android:pathPrefix="$APP_PATHPATTERN" />
+                       <data android:scheme="http" android:host="$APP_HOST_BRANDED" android:pathPrefix="$APP_PATHPATTERN" />
                    </intent-filter>
                </activity>
            </config-file>
@@ -61,12 +64,14 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <config-file target="*-Debug.plist" parent="com.apple.developer.associated-domains">
             <array>
                 <string>applinks:$APP_HOST</string>
+                <string>applinks:$APP_HOST_BRANDED</string>
             </array>
         </config-file>
 
         <config-file target="*-Release.plist" parent="com.apple.developer.associated-domains">
             <array>
                 <string>applinks:$APP_HOST</string>
+                <string>applinks:$APP_HOST_BRANDED</string>
             </array>
         </config-file>
 
