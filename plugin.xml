@@ -18,7 +18,7 @@
 		<hook type="after_compile" src="hooks/logManifest.js"/>
 		<config-file parent="/*" target="res/xml/config.xml">
 			<preference name="DOMAIN_URI_PREFIX" value="https://$APP_HOST$APP_PATHPATTERN"/>
-			<preference name="DOMAIN_URI_PREFIX_BRANDED" value="https://$APP_HOST_BRANDED$APP_PATHPATTERN"/>
+			<preference name="DOMAIN_URI_PREFIX_BRANDED" value="https://$APP_BRANDED$APP_PATHPATTERN"/>
 			<feature name="CustomDeeplinks">
 				<param name="android-package" value="com.cordova.deeplinks.plugin.CustomDeeplinksPlugin"/>
 			</feature>
@@ -31,8 +31,8 @@
 					<category android:name="android.intent.category.BROWSABLE"/>
 					<data android:scheme="https" android:host="$APP_HOST" android:pathPrefix="$APP_PATHPATTERN"/>
 					<data android:scheme="http" android:host="$APP_HOST" android:pathPrefix="$APP_PATHPATTERN"/>
-					<data android:scheme="https" android:host="$APP_HOST_BRANDED" android:pathPrefix="$APP_PATHPATTERN"/>
-					<data android:scheme="http" android:host="$APP_HOST_BRANDED" android:pathPrefix="$APP_PATHPATTERN"/>
+					<data android:scheme="https" android:host="$APP_BRANDED" android:pathPrefix="$APP_PATHPATTERN"/>
+					<data android:scheme="http" android:host="$APP_BRANDED" android:pathPrefix="$APP_PATHPATTERN"/>
 				</intent-filter>
 			</activity>
 		</config-file>
@@ -48,13 +48,13 @@
 		<config-file target="*-Debug.plist" parent="com.apple.developer.associated-domains">
 			<array>
 				<string>applinks:$APP_HOST</string>
-				<string>applinks:$APP_HOST_BRANDED</string>
+				<string>applinks:$APP_BRANDED</string>
 			</array>
 		</config-file>
 		<config-file target="*-Release.plist" parent="com.apple.developer.associated-domains">
 			<array>
 				<string>applinks:$APP_HOST</string>
-				<string>applinks:$APP_HOST_BRANDED</string>
+				<string>applinks:$APP_BRANDED</string>
 			</array>
 		</config-file>
 		<source-file src="src/ios/CustomDeeplinksPlugin.h"/>
