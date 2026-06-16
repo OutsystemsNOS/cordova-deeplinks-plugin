@@ -9,7 +9,7 @@
 		<clobbers target="CustomDeeplinks"/>
 	</js-module>
 	<preference name="APP_HOST" default="app_host"/>
-	<preference name="APP_HOST_BRANDED" default="app_host_branded"/>
+	<preference name="APP_BRANDED" default="app_branded"/>
 	<preference name="APP_SCHEME" default="/"/>
 	<preference name="APP_PATHPATTERN" default="/"/>
 	<preference name="ENABLE_APPSFLYER_DEEEPLINKS" default="false"/>
