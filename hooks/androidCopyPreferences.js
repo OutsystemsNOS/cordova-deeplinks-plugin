@@ -13,7 +13,7 @@ module.exports = function (context) {
 
   var app_domain_name = configParser.getGlobalPreference("APP_HOST");
   var app_domain_branded_name =
-    configParser.setGlobalPreference("APP_HOST_BRANDED");
+    configParser.setGlobalPreference("APP_BRANDED");
 
   //ANDROID
   //go inside the AndroidManifest and change value for APP_DOMAIN_NAME
@@ -35,7 +35,7 @@ module.exports = function (context) {
 
   // Branded App Host
   var dataTagsBranded = etreeManifest.findall(
-    './application/activity/intent-filter/data[@android:host="app_host_branded"]',
+    './application/activity/intent-filter/data[@android:host="app_branded"]',
   );
 
   for (var i = 0; i < dataTagsBranded.length; i++) {
@@ -70,7 +70,7 @@ module.exports = function (context) {
     "DOMAIN_URI_PREFIX_BRANDED",
   );
   var newDomainUriPrefixBranded = oldDomainUriPrefixBranded.replace(
-    "app_host_branded",
+    "app_branded",
     app_domain_branded_name,
   );
   configAndroidParser.setGlobalPreference(
