@@ -36,8 +36,10 @@
 				</intent-filter>
 			</activity>
 		</config-file>
+		<!--
 		<source-file src="src/android/CustomDeeplinksPlugin.java" target-dir="src/com/cordova/deeplinks/plugin"/>
 		<source-file src="src/android/CustomDeeplinksActivity.java" target-dir="src/com/cordova/deeplinks/plugin"/>
+		-->
 	</platform>
 	<platform name="ios">
 		<config-file target="config.xml" parent="/*">
