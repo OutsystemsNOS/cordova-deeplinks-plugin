@@ -1,4 +1,4 @@
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.cordova.deeplinks.plugin" version="1.6">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.cordova.deeplinks.plugin" version="1.7">
 	<name>CustomDeeplinksPlugin</name>
 	<engines>
 		<engine name="cordova" version=">=9.0.0"/>
@@ -40,7 +40,10 @@
 		<source-file src="src/android/CustomDeeplinksActivity.java" target-dir="src/com/cordova/deeplinks/plugin"/>
 	</platform>
 	<platform name="ios">
+		<preference name="IOS_ATTRIBUTION_REPORT_ENDPOINT" default="none"/>
+		<preference name="IOS_ATTRIBUTION_COPY_ENDPOINT" default="none"/>
 		<hook type="after_prepare" src="hooks/iosCleanEntitlements.js"/>
+		<hook type="after_prepare" src="hooks/iosAttributionEndpoints.js"/>
 		<config-file target="config.xml" parent="/*">
 			<feature name="CustomDeeplinks">
 				<param name="ios-package" value="CustomDeeplinksPlugin"/>
@@ -57,6 +60,13 @@
 				<string>applinks:$APP_HOST</string>
 				<string>applinks:$APP_BRANDED</string>
 			</array>
+		</config-file>
+		<!-- Removed by hooks/iosAttributionEndpoints.js when the variable is omitted ("none") -->
+		<config-file target="*-Info.plist" parent="NSAdvertisingAttributionReportEndpoint">
+			<string>$IOS_ATTRIBUTION_REPORT_ENDPOINT</string>
+		</config-file>
+		<config-file target="*-Info.plist" parent="AttributionCopyEndpoint">
+			<string>$IOS_ATTRIBUTION_COPY_ENDPOINT</string>
 		</config-file>
 		<source-file src="src/ios/CustomDeeplinksPlugin.h"/>
 		<source-file src="src/ios/CustomDeeplinksPlugin.m"/>
