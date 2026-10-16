@@ -41,7 +41,43 @@ These are the configurable plugin variables:
 
 - `APP_SCHEME`: the URI scheme (e.g. `https`)
 - `APP_HOST`: the host/domain (e.g. `your app host`)
+- `APP_BRANDED`: optional branded host/domain (e.g. `your branded host`)
 - `APP_PATHPATTERN`: path pattern (e.g. `.*` for all paths)
+- `IOS_ATTRIBUTION_REPORT_ENDPOINT` *(iOS, optional, since 1.7)*: value of the `NSAdvertisingAttributionReportEndpoint` key (SKAdNetwork) in `Info.plist` (e.g. `https://appsflyer-skadnetwork.com/`)
+- `IOS_ATTRIBUTION_COPY_ENDPOINT` *(iOS, optional, since 1.7)*: value of the `AttributionCopyEndpoint` key (AdAttributionKit, iOS 17.4+) in `Info.plist` (e.g. `https://appsflyer-skadnetwork.com/`)
+
+### iOS attribution endpoints (optional)
+
+When `IOS_ATTRIBUTION_REPORT_ENDPOINT` / `IOS_ATTRIBUTION_COPY_ENDPOINT` are set, the plugin adds the corresponding keys to the root of the app `Info.plist`:
+
+```xml
+<key>NSAdvertisingAttributionReportEndpoint</key>
+<string>https://appsflyer-skadnetwork.com/</string>
+<key>AttributionCopyEndpoint</key>
+<string>https://appsflyer-skadnetwork.com/</string>
+```
+
+Each variable is independent. If a variable is omitted (or set to `none`, `undefined`, `null`, `false` or an empty value), its key is **not** added to `Info.plist`. This is handled by the `after_prepare` hook `hooks/iosAttributionEndpoints.js`, because `plugin.xml` cannot add `Info.plist` entries conditionally.
+
+### OutSystems extensibility configuration
+
+```json
+{
+  "plugin": {
+    "url": "https://github.com/OutsystemsNOS/cordova-deeplinks-plugin/tree/V1.7",
+    "variables": [
+      { "name": "APP_SCHEME", "value": "https" },
+      { "name": "APP_HOST", "value": "your app host" },
+      { "name": "APP_BRANDED", "value": "your branded host" },
+      { "name": "APP_PATHPATTERN", "value": "/" },
+      { "name": "IOS_ATTRIBUTION_REPORT_ENDPOINT", "value": "https://appsflyer-skadnetwork.com/" },
+      { "name": "IOS_ATTRIBUTION_COPY_ENDPOINT", "value": "https://appsflyer-skadnetwork.com/" }
+    ]
+  }
+}
+```
+
+To keep the 1.6 behaviour (no attribution keys), remove the two `IOS_ATTRIBUTION_*` variables.
 
 ## 🚀 Usage
 
